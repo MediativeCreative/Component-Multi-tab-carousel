@@ -1,0 +1,300 @@
+<main id="md_multiTab">
+    <a href="#md_multiTab" class="md_multiTabBtn" aria-label="Al 1"><h2>Button 1</h2></a>
+    <a href="#md_multiTab" class="md_multiTabBtn" aria-label="AL 2"><h2>Button 2Button 2Button 2Button 2Button 2Button 2</h2></a>
+    <section id="md_multiTabArrow"><span><div></div></span></section>
+</main>
+<style type="text/css">
+	html {
+	    scroll-behavior: smooth
+	}
+    #md_multiTab {
+        float: left;
+        width: 100%;
+        padding: 20px 0;
+        background: #f6f6f6;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    main#md_multiTab a.md_multiTabBtn {
+        float: left;
+        text-align: center;
+        display: flex;
+        background-opacity: .5;
+        cursor: pointer;
+        color: #1267a4;
+        outline: 0;
+        text-decoration: none;
+        padding: 15px 0;
+        transition: all .5s ease;
+    }
+    main#md_multiTab a.md_multiTabBtn > h2 {
+        padding: 0 15px;
+        margin: 0;
+    }
+    main#md_multiTab a.md_multiTabBtn:hover {
+        background: #e7f0f6;
+    }
+    main#md_multiTab section#md_multiTabArrow {
+        width: 100%;
+        background: #e7f0f6;
+        float: left;
+        height: 4px;
+        margin-bottom: 40px;
+        padding: 0;
+        margin-top: 10px;
+    }
+    main#md_multiTab section#md_multiTabArrow > span {
+        height: 8px;
+        background: #1267a4;
+        display: block;
+        position: relative;
+        bottom: 2px;
+        -webkit-transition: all .2s ease-out;
+        -moz-transition: all .2s ease-out;
+        -o-transition: all .2s ease-out;
+        transition: all .2s ease-out; 
+    }
+    main#md_multiTab section#md_multiTabArrow > span > div {
+        width: 0;
+        height: 0;
+        border-left: 25px solid transparent;
+        border-right: 25px solid transparent;
+        border-top: 20px solid #1267a4;
+        margin: 0 auto;
+        float: none;
+    }
+    .mdChangeContent {
+	    -webkit-animation: fadeEffect 1s;
+	    animation: fadeEffect 1s;
+	}
+	@-webkit-keyframes fadeEffect {
+	    from {opacity: 0;}
+	    to {opacity: 1;}
+	}
+	@keyframes fadeEffect {
+	    from {opacity: 0;}
+	    to {opacity: 1;}
+	}
+</style>
+<script type="text/javascript">
+    var mdMTBtn  = document.getElementsByClassName('md_multiTabBtn');
+	var mdGetElements;
+	var mdMTArrow  = document.getElementById('md_multiTabArrow').firstElementChild;
+	var mdMTContainer = document.getElementById('md_multiTab').getBoundingClientRect().left;
+	window.mdNewPosition = null;
+	var mdFr = 'Produits-vedettes: ';
+	var mdEn = 'Featured Products: ';
+	var mdElementsAL, mdBtnAL;
+
+	var clicked = function() {
+		for (var i = 0; i < mdMTBtn.length; i++) {
+			mdBtnAL = mdMTBtn[i].getAttribute('aria-label');
+			mdGetElements = document.querySelectorAll("[aria-label]");
+			for (j = 0; j < mdGetElements.length; j++) {
+				mdElementsAL = mdGetElements[j].getAttribute('aria-label');
+				if (mdElementsAL == mdBtnAL && !mdGetElements[j].classList.contains("md_multiTabBtn") || mdElementsAL == (mdEn + mdBtnAL) || mdElementsAL == (mdFr + mdBtnAL)) {
+					mdGetElements[j].style.display = 'none'; 
+					mdGetElements[j].classList.add('mdChangeContent');
+				} 
+			}
+			var mdDefaultEle = document.querySelectorAll('[aria-label^="' + mdMTBtn[0].getAttribute('aria-label') + '"], [aria-label^="' + mdEn + mdMTBtn[0].getAttribute('aria-label') + '"], [aria-label^="' + mdFr + mdMTBtn[0].getAttribute('aria-label') + '"]');
+			for (k = 0; k < mdDefaultEle.length; k++) {
+				mdDefaultEle[k].style.display = 'block';
+			}
+			mdMTBtn[i].onclick = function() {
+				for (l = 0; l < mdMTBtn.length; l++) {
+					mdBtnAL = mdMTBtn[l].getAttribute('aria-label');
+					var thisAL = this.getAttribute('aria-label');
+					mdNewPosition = this;
+					for (j = 0; j < mdGetElements.length; mdElementsAL = mdGetElements[j].getAttribute('aria-label'),	mdElementsAL == thisAL || mdElementsAL == (mdEn + thisAL) || mdElementsAL == (mdFr + thisAL) ? mdGetElements[j].style.display = 'block' : mdElementsAL == mdBtnAL && mdElementsAL != thisAL && !mdGetElements[j].classList.contains("md_multiTabBtn") || mdElementsAL == (mdEn + mdBtnAL) || mdElementsAL == (mdFr + mdBtnAL) ? mdGetElements[j].style.display = 'none' : '', j++);
+				}
+			}
+		}
+	}
+	var resized = function() {
+		for (i = 0; i < mdMTBtn.length; i++) {
+			mdMTBtn[i].style.width = 100 / mdMTBtn.length + '%';
+			mdMTBtn[i].onmouseover = function() { mdMTArrow.style.left = this.getBoundingClientRect().left - mdMTContainer + 'px'; }
+			var move = function() { mdNewPosition !== null ? mdMTArrow.style.left = mdNewPosition.getBoundingClientRect().left - mdMTContainer + 'px' : mdMTArrow.style.left = mdMTBtn[0].getBoundingClientRect().left - mdMTContainer + 'px'; }
+			mdMTBtn[i].onmouseout = function() {	move();	}
+		}
+		mdMTArrow.style.width = mdMTBtn[0].offsetWidth + 'px';
+		var mdMTContainer = document.getElementById('md_multiTab').getBoundingClientRect().left;
+		move();	
+	}
+    window.onload = function() {
+		clicked();
+		resized();
+	}
+	window.onresize = function() {
+		resized();
+	}
+</script>
+
+
+
+
+<button class="progress-button">
+  <span class="content">Submit</span>
+  <span class="progress">
+    <span class="progress-inner"></span>
+  </span>
+</button>
+<style type="text/css">
+.progress-button {
+  position: relative;
+  display: inline-block;
+  padding: 0 60px;
+  outline: none;
+  border: none;
+  background: #1d9650;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 1em;
+  line-height: 4;
+}
+.progress-button[disabled] {
+  cursor: default;
+}
+.progress-button[disabled].state-loading {
+  cursor: default;
+}
+.progress-button .content {
+  position: relative;
+  display: block;
+}
+.progress-button .content::before, .progress-button .content::after {
+  position: absolute;
+  right: 20px;
+  color: #0e7138;
+  font-family: "icomoon";
+  opacity: 0;
+  -webkit-transition: opacity 0.3s 0.3s;
+  transition: opacity 0.3s 0.3s;
+}
+.progress-button .content::before {
+  content: "success";
+}
+.progress-button .content::after {
+  content: "error";
+}
+.progress-button.state-success .content::before, .progress-button.state-error .content::after {
+  opacity: 1;
+}
+
+.progress-button {
+  overflow: hidden;
+  -webkit-transition: -webkit-transform 0.2s;
+  transition: -webkit-transform 0.2s;
+  transition: transform 0.2s;
+  transition: transform 0.2s, -webkit-transform 0.2s;
+}
+.progress-button .progress {
+  background: #148544;
+}
+.progress-button .progress-inner {
+  position: absolute;
+  left: 0;
+  background: #0e7138;
+  top: 0;
+  width: 0;
+  height: 100%;
+  opacity: 0;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+.progress-button .content {
+  -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+  transition: opacity 0.3s, -webkit-transform 0.3s;
+  transition: opacity 0.3s, transform 0.3s;
+  transition: opacity 0.3s, transform 0.3s, -webkit-transform 0.3s;
+}
+.progress-button .content::before, .progress-button .content::after {
+  top: 100%;
+  right: auto;
+  left: 50%;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+.progress-button.state-loading {
+  -webkit-transform: scaleY(0.3);
+          transform: scaleY(0.3);
+}
+.progress-button.state-loading .content {
+  opacity: 0;
+}
+.progress-button.state-success .content, .progress-button.state-error .content {
+  -webkit-transform: translateY(-100%);
+          transform: translateY(-100%);
+}
+
+.state-loading .progress-inner {
+  opacity: 1;
+  -webkit-transition: width 0.3s;
+  transition: width 0.3s;
+}
+</style>
+<script type="text/javascript">
+//"use strict";
+function progressButton(element) {
+  var status = 1,
+    buttonEl = element,
+    progressEl = buttonEl.getElementsByClassName("progress-inner")[0];
+
+  buttonEl.disabled = true;
+  buttonEl.classList.add("state-loading");
+
+  var progress = 0,
+    interval = setInterval(function() {
+      progress = Math.min(progress + Math.random() * /*0.1*/6, 1); 
+      progressEl.style.width = 100 * progress + "%";
+
+      if (progress == 1) {
+        clearInterval(interval);
+      }
+    }, 200);
+
+  progressEl.addEventListener("transitionend", function() {
+    this.removeEventListener("transitionend", this);
+    this.style.width = 0;
+
+    var statusClass = status ? "state-success" : "state-error";
+
+    buttonEl.classList.add('state-success');
+
+    setTimeout(function() {
+      buttonEl.classList.remove('state-success');
+      buttonEl.disabled = false;
+    }, 1500);
+
+    buttonEl.classList.remove("state-loading");
+  });
+}
+
+document.getElementsByClassName("progress-button")[0].onclick = function() {
+  progressButton(this);
+  go();
+};
+
+
+var code = '<main id="md_multiTab">\n<a href="#md_multiTab" class="md_multiTabBtn" aria-label="AL 1"><h2>Button 1</h2></a>\n<a href="#md_multiTab" class="md_multiTabBtn" aria-label="AL 2"><h2>Button 2</h2></a>\n<section id="md_multiTabArrow"><span><div></div></span></section>\n</main>\n<script type="text/javascript" src="https://www.mediative.co/creativeservices/test/text.js"><\/script>\n<link rel="stylesheet" type="text/css" href="https://www.mediative.co/creativeservices/test/text.css">';  
+	var copyCode = document.getElementById('mdCopyMultiTab');
+	var go = function() {
+	    var tableHtml = code;
+	    var textArea = document.createElement("textarea");
+	    textArea.value = tableHtml;
+	    document.body.appendChild(textArea);
+	    textArea.select();
+	    try {
+	    	var successful = document.execCommand('copy');
+	   		this.innerHTML = 'Code copied!';
+	    } catch (err) {
+	   		this.innerHTML = 'Fatal error :(';
+	    }
+	    document.body.removeChild(textArea); 
+	    window.getSelection().removeAllRanges();
+	};
+</script>

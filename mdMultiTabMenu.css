@@ -1,0 +1,77 @@
+<style type="text/css">
+
+html {
+    scroll-behavior: smooth
+}
+#md_multiTab {
+    float: left;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+main#md_multiTab a.md_multiTabBtn {
+    float: left;
+    text-align: center;
+    display: flex;
+    cursor: pointer;
+    color: #1267a4;
+    outline: 0;
+    text-decoration: none;
+    padding: 15px 0;
+    -webkit-transition: all .5s ease-out;
+    -moz-transition: all .5s ease-out;
+    -o-transition: all .5s ease-out;
+    transition: all .5s ease-out;
+}
+main#md_multiTab a.md_multiTabBtn h2 {
+    padding: 0 15px;
+    float: none;
+    display: block;
+    margin: 0 auto;
+}
+main#md_multiTab a.md_multiTabBtn:hover {
+    background: #e7f0f6;
+}
+main#md_multiTab section#md_multiTabArrow {
+    width: 100%;
+    background: #e7f0f6;
+    float: left;
+    height: 4px;
+    padding: 0;
+    margin-top: 10px;
+}
+main#md_multiTab section#md_multiTabArrow span {
+    height: 8px;
+    background: #1267a4;
+    display: block;
+    position: relative;
+    bottom: 2px;
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out; 
+}
+main#md_multiTab section#md_multiTabArrow span div {
+    width: 0;
+    height: 0;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-top: 20px solid #1267a4;
+    margin: 0 auto;
+    float: none;
+}
+.mdChangeContent {
+    -webkit-animation: fadeEffect .25s;
+    animation: fadeEffect .25s;
+}
+@-webkit-keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+@keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+</style>
